@@ -13,7 +13,14 @@ DOXYGEN = .
 HTML_BUILD_DIR = $${OUT_PWD}/html/
 # qmake creates wrong install rules for directories
 # that do not exist at qmake time, so we hack it here
-system(mkdir -p $$HTML_BUILD_DIR)
+win32{
+    HTML_BUILD_DIR_WINDOWS = $$HTML_BUILD_DIR
+    HTML_BUILD_DIR_WINDOWS ~= s,/,\\,g # replace slashes for windows
+    system(if not exist $$HTML_BUILD_DIR_WINDOWS mkdir $$HTML_BUILD_DIR_WINDOWS)
+}
+!win32 {
+    system(mkdir -p $$HTML_BUILD_DIR)
+}
 
 doc.name = doc
 doc.CONFIG += target_predeps no_link

@@ -204,7 +204,14 @@ defineTest(outputFile) {
     }
     command += $$in > $$out
 
-    system(mkdir -p $$dirname(out))
+    win32{
+        DIRNAME_OUT_WINDOWS = $$dirname(out)
+        DIRNAME_OUT_WINDOWS ~= s,/,\\,g # replace slashes for windows
+        system(if not exist $$DIRNAME_OUT_WINDOWS mkdir $$DIRNAME_OUT_WINDOWS)
+    }
+    !win32 {
+        system(mkdir -p $$dirname(out))
+    }
     system($$command)
     system(chmod --reference=$$in $$out)
 
