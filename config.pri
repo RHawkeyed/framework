@@ -12,11 +12,14 @@ MALIIT_GLIB_LIB = maliit-glib
 
 include(defines.pri)
 
-# Linker optimization for release build
-QMAKE_LFLAGS_RELEASE+=-Wl,--as-needed
-# Compiler warnings are error if the build type is debug
-QMAKE_CXXFLAGS_DEBUG+=-Werror -O0
-QMAKE_CFLAGS_DEBUG+=-Werror -O0
+!msvc{
+    # Linker optimization for release build
+    QMAKE_LFLAGS_RELEASE+=-Wl,--as-needed
+    # Compiler warnings are error if the build type is debug
+
+    QMAKE_CXXFLAGS_DEBUG+=-Werror -O0
+    QMAKE_CFLAGS_DEBUG+=-Werror -O0
+}
 
 OBJECTS_DIR = .obj
 MOC_DIR = .moc
