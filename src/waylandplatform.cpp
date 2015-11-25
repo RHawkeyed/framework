@@ -143,7 +143,7 @@ void WaylandPlatformPrivate::handleRegistryGlobal(uint32_t name,
 void WaylandPlatformPrivate::handleRegistryGlobalRemove(uint32_t name)
 {
     qDebug() << __PRETTY_FUNCTION__ << "Name:" << name;
-    if (m_panel and m_panel_name == name) {
+    if (m_panel && m_panel_name == name) {
         m_panel.reset();
     }
 }
@@ -187,7 +187,7 @@ void WaylandPlatform::setupInputPanel(QWindow* window,
                                       Maliit::Position position)
 {
     // we ignore non toplevel surfaces
-    if (not window or window->parent()) {
+    if (!window or window->parent()) {
         return;
     }
 
@@ -205,7 +205,7 @@ void WaylandPlatform::setupInputPanel(QWindow* window,
 void WaylandPlatform::setInputRegion(QWindow* window,
                                      const QRegion& region)
 {
-    if (not window) {
+    if (!window) {
         return;
     }
 

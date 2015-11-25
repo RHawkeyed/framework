@@ -90,11 +90,11 @@ void Ut_MImOnScreenPlugins::testActiveAndEnabledSubviews()
     MImSettings activeSetting(active_key);
     MImSettings enabledSetting(enabled_key);
 
-    if (not initially_active.isEmpty()) {
+    if (!initially_active.isEmpty()) {
         activeSetting.set(initially_active);
     }
 
-    if (not initially_enabled.isEmpty()) {
+    if (!initially_enabled.isEmpty()) {
         enabledSetting.set(initially_enabled);
     }
 

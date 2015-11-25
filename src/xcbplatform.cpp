@@ -31,7 +31,7 @@ void XCBPlatform::setupInputPanel(QWindow* window,
 {
     Q_UNUSED(position);
 
-    if (not window) {
+    if (!window) {
         return;
     }
 
@@ -80,7 +80,7 @@ void XCBPlatform::setupInputPanel(QWindow* window,
 void XCBPlatform::setInputRegion(QWindow* window,
                                  const QRegion& region)
 {
-    if (not window) {
+    if (!window) {
         return;
     }
 

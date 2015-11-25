@@ -86,7 +86,7 @@ void Ut_MInputMethodQuickPlugin::testQmlSetup()
     Maliit::InputMethodQuick *testee = static_cast<Maliit::InputMethodQuick *>(
         plugin->createInputMethod(&host));
 
-    QVERIFY(not testee->inputMethodArea().isEmpty());
+    QVERIFY(!testee->inputMethodArea().isEmpty());
     QCOMPARE(testee->inputMethodArea(),
              QRectF(0, qRound(testee->screenHeight() * 0.5),
                     testee->screenWidth(), qRound(testee->screenHeight() * 0.5)));
