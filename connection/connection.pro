@@ -4,7 +4,11 @@ TOP_DIR = ..
 
 VERSION = $$MALIIT_ABI_VERSION
 TEMPLATE = lib
-TARGET = $$TOP_DIR/lib/$$MALIIT_CONNECTION_LIB
+msvc | mingw {
+    TARGET = ../$$TOP_DIR/lib/$$MALIIT_CONNECTION_LIB # is one level deeper because of debug/release folder
+} else {
+    TARGET = $$TOP_DIR/lib/$$MALIIT_CONNECTION_LIB
+}
 
 include($$TOP_DIR/common/libmaliit-common.pri)
 include($$TOP_DIR/weston-protocols/libmaliit-weston-protocols.pri)

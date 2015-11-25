@@ -4,7 +4,11 @@ TOP_DIR = ..
 
 VERSION = $$MALIIT_ABI_VERSION
 TEMPLATE = lib
-TARGET = $$TOP_DIR/lib/maliit-weston-protocols
+msvc | mingw {
+    TARGET = ../$$TOP_DIR/lib/maliit-weston-protocols # is one level deeper because of debug/release folder
+} else {
+    TARGET = $$TOP_DIR/lib/maliit-weston-protocols
+}
 
 CONFIG += staticlib
 

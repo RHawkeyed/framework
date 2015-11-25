@@ -4,7 +4,11 @@ TOP_DIR = ..
 
 VERSION = $$MALIIT_ABI_VERSION
 TEMPLATE = lib
-TARGET = $$TOP_DIR/lib/$$MALIIT_PLUGINS_LIB
+msvc | mingw {
+    TARGET = ../$$TOP_DIR/lib/$$MALIIT_PLUGINS_LIB # is one level deeper because of debug/release folder
+} else {
+    TARGET = $$TOP_DIR/lib/$$MALIIT_PLUGINS_LIB
+}
 
 # Input
 PLUGIN_HEADERS_PUBLIC = \

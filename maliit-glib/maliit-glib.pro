@@ -4,7 +4,11 @@ include(../config.pri)
 
 VERSION = $$MALIIT_ABI_VERSION
 TEMPLATE = lib
-TARGET = $$TOP_DIR/lib/$${MALIIT_GLIB_LIB}
+msvc | mingw {
+    TARGET = ../$$TOP_DIR/lib/$${MALIIT_GLIB_LIB} # is one level deeper because of debug/release folder
+} else {
+    TARGET = $$TOP_DIR/lib/$${MALIIT_GLIB_LIB}
+}
 
 CONFIG += link_pkgconfig
 PKGCONFIG += glib-2.0 gobject-2.0 gio-2.0 gio-unix-2.0

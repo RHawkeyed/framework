@@ -101,23 +101,26 @@ unix {
 }
 
 win32 {
-    # qmake puts libraries in subfolders in build tree on Windows (installation is unaffected)
-    release {
-        MALIIT_STATIC_PREFIX=release/lib
-        MALIIT_DYNAMIC_PREFIX=release/
-    }
-    debug {
-        MALIIT_STATIC_PREFIX=debug/lib
-        MALIIT_DYNAMIC_PREFIX=debug/
-    }
-
-    # one would suspect this to be .lib, but qmake with mingw uses .a
-    MALIIT_STATIC_SUFFIX=.a
-
     # qmake adds the first component of the version as part of the DLL name on Windows
     MALIIT_ABI_VERSIONS=$$split(MALIIT_ABI_VERSION, ".")
     MALIIT_ABI_VERSION_MAJOR=$$member(MALIIT_ABI_VERSIONS, 0)
-    MALIIT_DYNAMIC_SUFFIX=$${MALIIT_ABI_VERSION_MAJOR}.dll
+
+    mingw{
+        MALIIT_STATIC_PREFIX=lib
+        MALIIT_DYNAMIC_PREFIX=
+
+        # one would suspect this to be .lib, but qmake with mingw uses .a
+        MALIIT_STATIC_SUFFIX=.a
+        MALIIT_DYNAMIC_SUFFIX=$${MALIIT_ABI_VERSION_MAJOR}.dll
+    }
+
+    msvc{
+        MALIIT_STATIC_PREFIX=
+        MALIIT_DYNAMIC_PREFIX=
+        MALIIT_STATIC_SUFFIX=.lib
+        # while the dynamic library is a .dll msvc uses a seperate .lib import library for linking
+        MALIIT_DYNAMIC_SUFFIX=$${MALIIT_ABI_VERSION_MAJOR}.lib
+    }
 }
 
 defineReplace(maliitStaticLib) {

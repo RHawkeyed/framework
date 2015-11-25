@@ -3,7 +3,11 @@ include(../config.pri)
 TOP_DIR = ..
 
 TEMPLATE = lib
-TARGET = $$TOP_DIR/lib/maliit-common
+msvc | mingw {
+    TARGET = ../$$TOP_DIR/lib/maliit-common # is one level deeper because of debug/release folder
+} else {
+    TARGET = $$TOP_DIR/lib/maliit-common
+}
 
 CONFIG += staticlib
 
