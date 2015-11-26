@@ -12,6 +12,11 @@ MALIIT_GLIB_LIB = maliit-glib
 
 include(defines.pri)
 
+msvc{
+    #msvc doesn't have __PRETTY_FUNCTION__, uses __FUNCSIG__ instaed
+    DEFINES += __PRETTY_FUNCTION__=__FUNCSIG__
+}
+
 !msvc{
     # Linker optimization for release build
     QMAKE_LFLAGS_RELEASE+=-Wl,--as-needed
