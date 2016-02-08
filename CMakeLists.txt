@@ -288,10 +288,16 @@ add_definitions(-DMALIIT_FRAMEWORK_USE_INTERNAL_API
                 -DMALIIT_EXTENSIONS_DIR="${SHARE_INSTALL_PREFIX}/maliit-framework/extensions"
                 -DMALIIT_CONFIG_ROOT="/maliit/"
                 -DMALIIT_PLUGINS_DIR="${LIB_INSTALL_DIR}/maliit/plugins"
-                -DMALIIT_DEFAULT_HW_PLUGIN="libmaliit-keyboard-plugin.so"
                 -DMALIIT_ENABLE_MULTITOUCH=true
-                -DMALIIT_DEFAULT_PLUGIN="libmaliit-keyboard-plugin.so"
                 -DMALIIT_DEFAULT_SUBVIEW="")
+            
+if(MSVC)
+    add_definitions(-DMALIIT_DEFAULT_HW_PLUGIN="maliit-keyboard-plugin.dll"
+                    -DMALIIT_DEFAULT_PLUGIN="maliit-keyboard-plugin.dll")
+else()
+    add_definitions(-DMALIIT_DEFAULT_HW_PLUGIN="libmaliit-keyboard-plugin.so"
+                    -DMALIIT_DEFAULT_PLUGIN="libmaliit-keyboard-plugin.so")
+endif()
 
 add_executable(maliit-server passthroughserver/main.cpp)
 target_link_libraries(maliit-server maliit-plugins maliit-connection)
